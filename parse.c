@@ -36,7 +36,7 @@ void parse(char *name, char *symb, char *params)
 
             for (int cnt = range[0]; cnt<range[1]+1; ++cnt)
             {
-                printf("%s\t",rtext);
+                printf("%25s|",rtext);
                 rtext = strtok(NULL,";");
             }
             printf("\n");
@@ -52,7 +52,7 @@ void parse(char *name, char *symb, char *params)
             rtext = strtok(text,symb);
             while(rtext != NULL)
             {
-                printf("%s\t", rtext);
+                printf("%25s|", rtext);
                 rtext = strtok(NULL,symb);
             }
             printf("\n");
