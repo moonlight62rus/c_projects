@@ -13,11 +13,14 @@ char params[10];        //cols in csv file
 char symb[2];	 	//Symbol for parse
 char PathName[200];//buffer for directory
 char PN;                //pointer for PathName
+int cnts;		//counts for mean_aver
+char averrange[10];
+
 int main(int argc, char *argv[])
 {
     int c;
     /*GETOPT*/
-    while((c=getopt(argc, argv, "ndr"))!=-1)
+    while((c=getopt(argc, argv, "ndrm"))!=-1)
     {
         switch(c)
         {
@@ -31,6 +34,8 @@ int main(int argc, char *argv[])
 
 		strcpy(symb,";\0");
 		strcpy(params,"no\0");
+		strcpy(averrange, "1-2");
+		cnts = 2;
             break;
 
             case 'd':
@@ -41,6 +46,14 @@ int main(int argc, char *argv[])
             case 'r':
     		 printf("[OPTIONAL!!!] Enter parameters a-x or press 'no' if no use parameters\n");
     		 scanf("%s", params);
+	    break;
+
+	    case 'm':
+		 printf("Enter the number of counts\n");
+		 scanf("%s",averrange);
+		 cnts = atoi(averrange);
+		 printf("Enter the range of columns to calculate the moving average\n");
+		 scanf("%s", averrange);
             break;
 	    
             default:
@@ -49,7 +62,7 @@ int main(int argc, char *argv[])
     }
 
     /*Parsing file function*/
-    parse(PathName,symb,params);
+    parse(PathName,symb,params,cnts,averrange);
 
     return 0;
 }
